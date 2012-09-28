@@ -1,3 +1,5 @@
+require "uri"
+
 require "./IdWebPage"
 require "./IdFolder"
 
@@ -13,6 +15,6 @@ imageEnum = webPage.getImageEnum()
 folder = IdFolder.new(title)
 
 imageEnum.each {|elem|
-  folder.saveImage(elem["src"])
+  folder.saveImage(URI.join(webPage.getUrl, elem["src"]))
 }
 

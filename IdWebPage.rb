@@ -4,7 +4,10 @@ require 'open-uri'
 
 class IdWebPage
   def initialize(url)
-    @document = Hpricot(open(url))
+    #@document = Hpricot(open(url))
+    @url = url
+    @document = open(url) { |f| Hpricot(f) }
+    #puts @document.methods
   end
   
   def getImageEnum
@@ -13,5 +16,9 @@ class IdWebPage
   
   def getTitle
     @document.search("title").first.inner_html
+  end
+  
+  def getUrl
+    @url
   end
 end
